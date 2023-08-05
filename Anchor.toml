@@ -1,0 +1,18 @@
+[features]
+seeds = false
+skip-lint = false
+[programs.localnet]
+waffle_maker = "B6cnkQKZeNT4VEmkjfNfisL4UzobUfL5wU93xi16DSTU"
+
+[programs.devnet]
+waffle_maker = "B6cnkQKZeNT4VEmkjfNfisL4UzobUfL5wU93xi16DSTU"
+
+[registry]
+url = "https://api.apr.dev"
+
+[provider]
+cluster = "Devnet"
+wallet = "/Users/anamansari/.config/solana/id.json"
+
+[scripts]
+test = "yarn run ts-mocha -p ./tsconfig.json -t 1000000 tests/**/*.ts"
