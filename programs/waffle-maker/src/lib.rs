@@ -8,11 +8,13 @@ pub mod waffle_maker {
 
     pub fn create_waffle (ctx: Context<CreateWaffle>, name: String) -> Result<()> {
         
-        require!(name.chars().count() > 30, WaffleError::NameTooLong);
-        require!(name.chars().count() < 1, WaffleError::NameEmpty);
+        require!(name.chars().count() < 30, WaffleError::NameTooLong);
+        require!(name.chars().count() > 1, WaffleError::NameEmpty);
 
         ctx.accounts.waffle.author = ctx.accounts.author.key();
         ctx.accounts.waffle.name = name;
+
+        msg!("Waffle {} created", &ctx.accounts.waffle.name);
 
         Ok(())
     }
@@ -46,9 +48,11 @@ impl Waffle {
 #[instruction(name: String)]
 pub struct CreateWaffle<'info> {
     #[account(
-        init, 
+        init_if_needed, 
         payer = author, 
-        space = Waffle::LEN + name.len(), 
+        space = Waffle::LEN + name.len(),
+        seeds = [b"waffle", name.as_bytes()],
+        bump 
     )]
     pub waffle: Account<'info, Waffle>,
     
