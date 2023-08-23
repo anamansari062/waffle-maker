@@ -1,0 +1,56 @@
+{
+    "version": "0.1.0",
+    "name": "waffle_maker",
+    "instructions": [{
+        "name": "createWaffle",
+        "accounts": [{
+                "name": "waffle",
+                "isMut": true,
+                "isSigner": false
+            },
+            {
+                "name": "author",
+                "isMut": true,
+                "isSigner": true
+            },
+            {
+                "name": "systemProgram",
+                "isMut": false,
+                "isSigner": false
+            }
+        ],
+        "args": [{
+            "name": "name",
+            "type": "string"
+        }]
+    }],
+    "accounts": [{
+        "name": "Waffle",
+        "type": {
+            "kind": "struct",
+            "fields": [{
+                    "name": "author",
+                    "type": "publicKey"
+                },
+                {
+                    "name": "name",
+                    "type": "string"
+                }
+            ]
+        }
+    }],
+    "errors": [{
+            "code": 6000,
+            "name": "NameTooLong",
+            "msg": "Waffle name can be 30 characters long."
+        },
+        {
+            "code": 6001,
+            "name": "NameEmpty",
+            "msg": "You need to name the Waffle."
+        }
+    ],
+    "metadata": {
+        "address": "B6cnkQKZeNT4VEmkjfNfisL4UzobUfL5wU93xi16DSTU"
+    }
+}
